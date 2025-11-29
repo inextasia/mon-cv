@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Damien Etancelin - Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* --- THEME DARK NEON GAMING --- */
+            --bg-color: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            
+            /* Couleurs Néons */
+            --cyan: #22d3ee;
+            --purple: #a78bfa;
+            --green: #34d399;
+            --orange: #fb923c;
+            --pink: #f472b6; /* Pour Figma */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND NEONS (Blobs animés) --- */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: pulse 8s infinite alternate;
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+        
+        .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: var(--purple); }
+        .blob-2 { bottom: 10%; right: -10%; width: 400px; height: 400px; background: var(--cyan); }
+        .blob-3 { top: 40%; left: 30%; width: 300px; height: 300px; background: rgba(52, 211, 153, 0.15); }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 25px;
+        }
+
+        /* --- GLASS CARDS --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- HEADER --- */
+        .header { grid-column: 1 / -1; text-align: center; padding: 40px 20px; }
+        h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: 1px; color: #fff; margin-bottom: 5px; }
+        .subtitle { font-size: 1.2rem; color: var(--cyan); font-weight: 600; margin-bottom: 20px; text-transform: uppercase; }
+
+        .alert-box {
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid var(--cyan);
+            border-radius: 12px;
+            padding: 15px;
+            display: inline-block;
+            max-width: 800px;
+        }
+        .highlight { color: #fff; font-weight: bold; border-bottom: 2px solid var(--green); }
+
+        /* --- SIDEBAR --- */
+        .section-title {
+            font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px;
+            border-bottom: 2px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 20px;
+            color: var(--cyan);
+        }
+
+        .contact-list li { margin-bottom: 12px; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; list-style: none;}
+        .contact-list a { color: var(--text-main); text-decoration: none; transition: 0.3s; }
+        .contact-list a:hover { color: var(--cyan); }
+        
+        .icon-svg { width: 18px; height: 18px; fill: #fff; }
+
+        /* SKILL BARS ANIMÉES */
+        .skill-box { margin-bottom: 25px; }
+        .skill-box h4 { font-size: 0.9rem; margin-bottom: 12px; color: #fff; border-left: 3px solid var(--cyan); padding-left: 8px;}
+        
+        .skill-bar-container { margin-bottom: 15px; }
+        .skill-info { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px; color: var(--text-muted); }
+        .bar-bg { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; position: relative; }
+        .bar-fill {
+            height: 100%; border-radius: 4px; width: 0%;
+            position: relative; animation: loadSkill 1.5s ease-out forwards;
+        }
+        /* Effet de brillance qui passe sur la barre */
+        .bar-fill::after {
+            content: ''; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: translateX(-100%); animation: shimmer 2s infinite;
+        }
+
+        @keyframes loadSkill { to { width: var(--w); } }
+        @keyframes shimmer { 100% { transform: translateX(100%); } }
+
+        /* --- MAIN CONTENT --- */
+        .profile-text { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 30px; text-align: justify; }
+
+        .timeline-item { margin-bottom: 30px; padding-left: 20px; border-left: 2px solid var(--glass-border); position: relative; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -6px; top: 8px; width: 10px; height: 10px;
+            background: var(--bg-color); border: 2px solid var(--cyan); border-radius: 50%;
+        }
+        .role { font-size: 1.1rem; font-weight: 700; color: #fff; }
+        .company { color: var(--cyan); font-weight: 600; }
+        .date { font-size: 0.85rem; color: var(--text-muted); font-style: italic; }
+        .desc ul { list-style: none; margin-left: 10px; margin-top: 5px; }
+        .desc li::before { content: '▹'; margin-right: 8px; color: var(--cyan); }
+
+        /* Tags pour les outils */
+        .tag {
+            display: inline-block; background: rgba(255,255,255,0.1); color: var(--cyan);
+            padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; margin-right: 5px; margin-top: 5px;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+        }
+        .tag:hover { background: rgba(34, 211, 238, 0.2); border-color: var(--cyan); }
+
+        /* Couleurs spécifiques pour Figma/Canva */
+        .tag-figma { color: var(--pink); border-color: rgba(244, 114, 182, 0.3); }
+        .tag-canva { color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="container">
+        <header class="glass-card header">
+            <h1>DAMIEN ETANCELIN</h1>
+            <div class="subtitle">Développeur Informatique (En Formation CESI)</div>
+            <div class="alert-box">
+                <div style="color:var(--cyan); font-weight:bold; margin-bottom:5px;">🚀 STAGE ALTERNÉ : NON RÉMUNÉRÉ</div>
+                <div style="font-size:0.9rem; color:#e2e8f0;">
+                    💰 Coût <span class="highlight">0 €</span> • 📅 Rythme <span class="highlight">3 sem. Entreprise</span> / 1 sem. École
+                </div>
+            </div>
+        </header>
+
+        <aside class="glass-card">
+            <h3 class="section-title">Contact</h3>
+            <ul class="contact-list">
+                <li>📍 Rouen / St Etienne du Rouvray</li>
+                <li>🚗 Permis B & Véhiculé</li>
+                <li>📧 <a href="mailto:Damien.etancelin@me.com">Damien.etancelin@me.com</a></li>
+                <li>
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <a href="https://linkedin.com/in/damienetancelin" target="_blank">LinkedIn</a>
+                </li>
+                <li>
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <a href="https://github.com/inextasia" target="_blank">/inextasia</a>
+                </li>
+            </ul>
+
+            <br>
+            <h3 class="section-title">Compétences</h3>
+            
+            <div class="skill-box">
+                <h4>🎓 Initiation Scolaire</h4>
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>SQL / BDD</span><span>Débutant - En cours</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="background:var(--cyan); --w:25%;"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>JavaScript</span><span>Débutant - En cours</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="background:#facc15; --w:20%;"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Algo</span><span>En cours</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="background:var(--cyan); --w:30%;"></div></div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <h4>🚀 Autodidacte</h4>
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Swift (iOS)</span><span>Learning...</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="background:var(--orange); --w:15%;"></div></div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <h4>📅 À venir (2026)</h4>
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Python & C#</span><span>Programme CESI</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="background:#6366f1; --w:100%; opacity:0.15;"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Dév. Mobile</span><span>Programme CESI</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="background:#6366f1; --w:100%; opacity:0.15;"></div></div>
+                </div>
+            </div>
+
+            <br>
+            <h3 class="section-title">Outils & Design</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:5px;">
+                <span class="tag">macOS</span>
+                <span class="tag">Terminal zsh</span>
+                <span class="tag">Xcode</span>
+                <span class="tag">JetBrains</span>
+                <span class="tag">Git</span>
+                <span class="tag tag-figma">Figma</span>
+                <span class="tag tag-canva">Canva</span>
+            </div>
+            
+            <br>
+            <h3 class="section-title">Passions</h3>
+            <ul class="contact-list">
+                <li>🎨 Design (Produit & UI)</li>
+                <li>⚔️ Béhourd</li>
+                <li>🏋️‍♂️ Muscu & Running</li>
+                <li>🏂 Sports d'hiver</li>
+                <li>🎮 Jeux Vidéo</li>
+            </ul>
+        </aside>
+
+        <main class="glass-card">
+            <h3 class="section-title">Profil</h3>
+            <p class="profile-text">
+                En pleine transition vers le développement informatique après une carrière confirmée dans le commerce technique et l'atelier, je suis actuellement le cursus CESI (Titre RNCP de niveau 5). Mon statut spécifique offre un avantage rare : une présence en entreprise à <strong>80% du temps</strong> sans coût salarial (gratification 0€). Passionné par le design, l'écosystème Apple et la Blockchain, je suis un débutant curieux et motivé, prêt à apprendre vos méthodes de travail.
+            </p>
+
+            <h3 class="section-title">Formation</h3>
+            <div class="timeline-item">
+                <div style="display:flex; justify-content:space-between;">
+                    <span class="role">Titre Pro. Développeur</span>
+                    <span class="date">Oct. 2025 - Oct. 2026</span>
+                </div>
+                <div class="company">CESI École d'Ingénieurs (Rouen)</div>
+                <div class="desc">
+                    <em>45 jours de cours par an.</em>
+                    <ul>
+                        <li><strong>Actuellement :</strong> Bases algo, Modélisation, Langages procéduraux.</li>
+                        <li><strong>À venir :</strong> Python, C#, App Mobile, UI Design.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="section-title">Expérience Technique</h3>
+            <div class="timeline-item">
+                <div style="display:flex; justify-content:space-between;">
+                    <span class="role">Stagiaire Immersion Dév.</span>
+                    <span class="date">Mai 2025</span>
+                </div>
+                <div class="company">BLUE SOFT (Isneauville)</div>
+                <div class="desc">
+                    <ul>
+                        <li>Découverte de l'organisation <span class="tag">SCRUM</span>.</li>
+                        <li>Participation à la correction de bogues.</li>
+                        <li>Utilisation du terminal et de l'environnement de dév.</li>
+                    </ul>
+                    <p style="margin-top:8px; font-style:italic; color:var(--cyan);">"Vif intérêt pour le métier confirmé par l'équipe."</p>
+                </div>
+            </div>
+
+            <h3 class="section-title">Parcours Pro</h3>
+            <div class="timeline-item">
+                <div style="display:flex; justify-content:space-between;">
+                    <span class="role">Conseiller Vente & Responsable Atelier</span>
+                    <span class="date">2019 - 2025</span>
+                </div>
+                <div class="company">INTERSPORT</div>
+                <div class="desc">
+                    <ul>
+                        <li>Gestion de l'atelier : organisation, délais.</li>
+                        <li>Formateur technique pour les équipes.</li>
+                        <li>Conseil clientèle expert et suivi des objectifs.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div style="display:flex; justify-content:space-between;">
+                    <span class="role">Vendeur Technicien Ski</span>
+                    <span class="date">2016 - 2019</span>
+                </div>
+                <div class="company">STATIONS DE SKI</div>
+                <div class="desc">
+                    <ul>
+                        <li>Gestion d'atelier et location.</li>
+                        <li>Management d'équipe (saisonnier).</li>
+                        <li>Formation technique produit.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <span class="role">Technico-Commercial BtoB</span>
+                <div class="company">ADT SONOREP</div>
+                <div class="date">2013 - 2015</div>
+                <div class="desc">
+                    <ul>
+                        <li>Gestion de stock et prospection.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="section-title">Diplômes</h3>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div class="tag" style="border:1px solid #ffffff44; background: transparent;">Bachelor Management (2016)</div>
+                <div class="tag" style="border:1px solid #ffffff44; background: transparent;">BTS Technico-Commercial (2015)</div>
+                <div class="tag" style="border:1px solid #ffffff44; background: transparent;">Bac Pro Froid & Clim (2010)</div>
+                <div class="tag" style="border:1px solid #ffffff44; background: transparent;">BEP Électrotechnique (2008)</div>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>
