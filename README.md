@@ -2,7 +2,7 @@
 
 ### Développeur Informatique en devenir 💻 | Passionné par l'écosystème Apple 🍎
 
-Ancien manager commercial en pleine reconversion, je combine ma rigueur professionnelle avec ma nouvelle passion pour le code. Actuellement étudiant au **CESI Rouen**, je suis à la recherche d'une alternance pour monter en compétence.
+Ancien conseiller vente en pleine reconversion, je combine ma rigueur professionnelle avec ma nouvelle passion pour le code. Actuellement étudiant au **CESI Rouen**, je suis à la recherche d'une alternance pour monter en compétence.
 
 ---
 
